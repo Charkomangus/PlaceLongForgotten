@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\PurchasableObject.cs" />
     <Compile Include="Assets\Scripts\PurchaseManager.cs" />
     <Compile Include="Assets\Scripts\UiManager.cs" />
+    <None Include="Assets\Hologram\Shader\Hologram.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/CharK/OneDrive/Documents/PlaceLongForgotten/PlaceLongForgotten/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
