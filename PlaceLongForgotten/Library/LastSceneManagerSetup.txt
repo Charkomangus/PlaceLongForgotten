@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Campsite.unity
+- path: Assets/Scenes/Graduation.unity
   isLoaded: 1
   isActive: 1
