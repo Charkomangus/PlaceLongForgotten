@@ -19,12 +19,16 @@ public class MemoryGameManager : MonoBehaviour {
     public GameObject cardSelectFirst;
     public GameObject cardSelectSecond;
 
+    public float showCardTime;
+
     private float gridXOffset;
     private float gridYOffset;
 
     private float guessAttempts;
     private float correctGuesses;
     private float guessesInARow;
+
+    private float waitToResolveTimer;
 
     // Use this for initialization
     void Awake() {
@@ -50,6 +54,8 @@ public class MemoryGameManager : MonoBehaviour {
         guessAttempts = 32;
         correctGuesses = 24;
         guessesInARow = 0;
+
+        waitToResolveTimer = 0;
     }
 	
 	// Update is called once per frame
@@ -57,21 +63,30 @@ public class MemoryGameManager : MonoBehaviour {
 
         if (cardSelectFirst != null && cardSelectSecond != null)
         {
-            guessAttempts++;
-            if (cardSelectFirst.tag == cardSelectSecond.tag)
+            if (waitToResolveTimer < showCardTime)
             {
-                correctGuesses++;
-                guessesInARow++;
-                ResolveCorrectMatch();
+                waitToResolveTimer += Time.deltaTime;
             }
             else
             {
-                guessesInARow = 0;
-                ResolveWrongMatch();
-            }
+                guessAttempts++;
+                if (cardSelectFirst.tag == cardSelectSecond.tag)
+                {
+                    correctGuesses++;
+                    guessesInARow++;
+                    ResolveCorrectMatch();
+                }
+                else
+                {
+                    guessesInARow = 0;
+                    ResolveWrongMatch();
+                }
 
-            cardSelectFirst = null;
-            cardSelectSecond = null;
+                cardSelectFirst = null;
+                cardSelectSecond = null;
+
+                waitToResolveTimer = 0;
+            }
         }
 
         UpdateUI();
@@ -130,7 +145,10 @@ public class MemoryGameManager : MonoBehaviour {
     void ResolveWrongMatch()
     {
         cardSelectFirst.GetComponent<GameCardController>().clicked = false;
+        cardSelectFirst.GetComponent<GameCardController>().myCardBack.GetComponent<Animator>().SetBool("clicked", false);
+
         cardSelectSecond.GetComponent<GameCardController>().clicked = false;
+        cardSelectSecond.GetComponent<GameCardController>().myCardBack.GetComponent<Animator>().SetBool("clicked", false);
     }
 
     void UpdateUI()
@@ -141,6 +159,7 @@ public class MemoryGameManager : MonoBehaviour {
 
         float efficiency = correctGuesses / guessAttempts;
         efficiency *= 100;
+        Mathf.RoundToInt(efficiency);
         string efficiencyString = efficiency.ToString();
         efficiencyTextUI.text = efficiencyString;
 

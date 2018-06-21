@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class GameCardController : MonoBehaviour {
 
+    public GameObject cardBack;
     public Vector2Int positionInGrid;
     public bool clicked;
+
+    public GameObject myCardBack;
 
 	// Use this for initialization
 	void Start () {
         clicked = false;
+
+        myCardBack = Instantiate(cardBack, transform);
 	}
 	
 	// Update is called once per frame
@@ -33,6 +38,7 @@ public class GameCardController : MonoBehaviour {
             }
 
             clicked = true;
+            myCardBack.GetComponent<Animator>().SetBool("clicked", true);
         }
 
     }
