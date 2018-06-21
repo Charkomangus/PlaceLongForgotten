@@ -811,6 +811,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _credits: 0
+  _audioSource: {fileID: 0}
+  _SfxBuy: {fileID: 0}
+  _SfxSell: {fileID: 0}
+  _SfxDenied: {fileID: 0}
 --- !u!4 &1072427657
 Transform:
   m_ObjectHideFlags: 0
@@ -1423,7 +1427,7 @@ Prefab:
     - target: {fileID: 2000000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 8400000, guid: de6090971c3f0b644922783ce47e0811, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
   m_IsPrefabParent: 0

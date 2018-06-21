@@ -23,6 +23,7 @@ namespace Assets.Scripts
             _characterController = FindObjectOfType<RigidbodyFirstPersonController>();
             _purchaseObjects = GameObject.FindGameObjectsWithTag("Object");
             _uiManager = FindObjectOfType<UiManager>();
+           // TakePlayerControl();
         }
 	
         // Update is called once per frame
