@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts
@@ -9,8 +10,8 @@ namespace Assets.Scripts
         public Button SellButton;
         public Text MainText;
         public CanvasGroup PopUp;
-
         public GameObject Cursor;
+      
         // Use this for initialization
         void Start () {
 		
@@ -29,28 +30,29 @@ namespace Assets.Scripts
             PopUp.interactable = true;
         }
 
+
         public void SetUpPopUp(PurchasableObject _object)
         {
             if (_object.tag == "EmptyObject")
             {
-                MainText.text = "THIS IS AN AMAZING " + _object.name + " THAT IMPROVES THIS MEMORY. BUY IT FOR " + _object.GetPrice() + " NEURONS?";
+                MainText.text = _object.buyText + " Buy it for " + _object.GetPrice() + " neurons?";
                 BuyButton.gameObject.SetActive(true);
                 SellButton.gameObject.SetActive(false);
             }
             else
             {
-                MainText.text = "THIS IS AN AMAZING " + _object.name + " THAT IMPROVES THIS MEMORY. SELL IT FOR " + _object.GetPrice() + " NEURONS?";
+                MainText.text = _object.sellText + " Sell it for " + _object.GetPrice() + " neurons?";
                 BuyButton.gameObject.SetActive(false);
                 SellButton.gameObject.SetActive(true);
             }
         }
 
+        
         public void OutOfCash()
         {
-            MainText.text = "NOT ENOUGH MONEY. YOU MUST WORK MORE CITIZEN";
+            MainText.text = "NOT ENOUGH MONEY. YOU MUST WORK MORE CITIZEN.";
             BuyButton.gameObject.SetActive(false);
             SellButton.gameObject.SetActive(false);
-
         }
 
         //Close the pop up
@@ -60,5 +62,6 @@ namespace Assets.Scripts
             PopUp.alpha = 0.0f;
             PopUp.interactable = false;
         }
+
     }
 }

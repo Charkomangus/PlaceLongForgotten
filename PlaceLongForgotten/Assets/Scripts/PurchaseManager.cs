@@ -11,8 +11,11 @@ namespace Assets.Scripts
         private RigidbodyFirstPersonController _characterController;
         private GameObject[] _purchaseObjects;
         private UiManager _uiManager;
+        public AudioSource _audioSource;
+        public AudioClip _SfxBuy;
+        public AudioClip _SfxSell;
+        public AudioClip _SfxDenied;
 
-     
         // Use this for initialization
         void Start ()
         {
@@ -52,6 +55,7 @@ namespace Assets.Scripts
             ReturnPlayerControl();
             _currentObject = null;
             _uiManager.ClosePopUp();
+            _audioSource.PlayOneShot(_SfxSell);
         }
 
         //Bring the cursor back and freeze the player
@@ -62,8 +66,10 @@ namespace Assets.Scripts
             {
                 _uiManager.OutOfCash();
                 _currentObject = null;
+                _audioSource.PlayOneShot(_SfxDenied);
                 return;
             }
+            _audioSource.PlayOneShot(_SfxBuy);
             _uiManager.ClosePopUp();
             _credits -= _currentObject.GetPrice();
             _currentObject.TurnIntoObject();
